@@ -2,9 +2,9 @@ function getValues() {
 
     let userString = document.getElementById('checkerInput').value;
 
-    let isPalindrome = checkForPalindrome(userString);
+    let results = checkForPalindrome(userString);
 
-    displayResults(isPalindrome);
+    displayResults(results);
 
 }
 
@@ -13,7 +13,7 @@ function checkForPalindrome(userString) {
     let revString = '';
 
     userString = userString.toLowerCase();
-    
+
     let regex = /[^a-z0-9]/gi;
     userString = userString.replace(regex, '');
 
@@ -24,25 +24,25 @@ function checkForPalindrome(userString) {
         revString = revString + letter;
     }
 
-   
-    if (revString == userString) {
+    let palindromeObj = {
+        isPalindrome: (revString == userString),
+        reversedString: revString
+    };
 
-        return true;
-
-    } else {
-
-        return false;
-    }
+      return palindromeObj;
 
 }
 
-function displayResults(isPalindrome) {
+function displayResults(results) {
 
     let alertBox = document.getElementById('alert');
 
     alertBox.classList.remove('invisible');
 
-    if (isPalindrome == true) {
+    document.getElementById('msgReversed').textContent = `Your message reversed is: ${results.reversedString}`;
+
+    if (results.isPalindrome == true) {
+
         alertBox.classList.remove('alert-danger');
 
         document.getElementById('results').textContent = 'Great job! You entered a palindrome!';
@@ -50,6 +50,7 @@ function displayResults(isPalindrome) {
         alertBox.classList.add('alert-success');
 
     } else {
+
         alertBox.classList.remove('alert-success');
 
         document.getElementById('results').textContent = 'Oops, this is not a palindrome';
@@ -60,6 +61,6 @@ function displayResults(isPalindrome) {
 
 
 
- 
+
 
 }
