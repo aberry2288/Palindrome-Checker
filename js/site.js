@@ -53,7 +53,7 @@ function displayResults(results) {
 
         alertBox.classList.remove('alert-success');
 
-        document.getElementById('results').textContent = 'Oops, this is not a palindrome';
+        document.getElementById('results').textContent = 'Oops, this is not a palindrome :(';
 
         alertBox.classList.add('alert-danger');
 
