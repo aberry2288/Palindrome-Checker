@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-    <title>App Name: A Coding Challenge</title>
+    <title>Palindrome Checker: A Coding Challenge</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -30,7 +30,7 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="index.html">
                     <img src="/img/Tree Styled White.png" height="50" alt="developer logo">
-                    &nbsp;App Name
+                    &nbsp;Palindrome Checker
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -70,27 +70,84 @@
             <div class="col-12 col-lg-8">
                 <pre class="line-numbers">
                     <code class="language-js">
-                        function displayMessage() {
+                        function getValues() {
 
-                            let inputBox = document.getElementById('message');
+                            let userString = document.getElementById('checkerInput').value;
                         
-                            let message = inputBox.value;
+                            let results = checkForPalindrome(userString);
                         
-                            Swal.fire(
-                                {
-                                    backdrop: false,
-                                    title: 'App Name',
-                                    text: message
-                                }
-                            );
+                            displayResults(results);
+                        
+                        }
+                        
+                        function checkForPalindrome(userString) {
+                        
+                            let revString = '';
+                        
+                            userString = userString.toLowerCase();
+                        
+                            let regex = /[^a-z0-9]/gi;
+                            userString = userString.replace(regex, '');
+                        
+                            for (let index = userString.length - 1; index >= 0; index = index - 1) {
+                        
+                                let letter = userString[index];
+                        
+                                revString = revString + letter;
+                            }
+                        
+                            let palindromeObj = {
+                                isPalindrome: (revString == userString),
+                                reversedString: revString
+                            };
+                        
+                              return palindromeObj;
+                        
+                        }
+                        
+                        function displayResults(results) {
+                        
+                            let alertBox = document.getElementById('alert');
+                        
+                            alertBox.classList.remove('invisible');
+                        
+                            document.getElementById('msgReversed').textContent = `Your message reversed is: ${results.reversedString}`;
+                        
+                            if (results.isPalindrome == true) {
+                        
+                                alertBox.classList.remove('alert-danger');
+                        
+                                document.getElementById('results').textContent = 'Great job! You entered a palindrome!';
+                        
+                                alertBox.classList.add('alert-success');
+                        
+                            } else {
+                        
+                                alertBox.classList.remove('alert-success');
+                        
+                                document.getElementById('results').textContent = 'Oops, this is not a palindrome';
+                        
+                                alertBox.classList.add('alert-danger');
+                        
+                            }
                         }
                     </code>
                 </pre>
             </div>
             <div class="col-12 col-lg-4">
-                <p>The code is structured in one function</p>
-                <h5>displayMessage</h5>
-                <p>Shows a sweet alert with the value of the <code>message</code> variable</p>
+                <p>The code is structured in three functions...</p>
+                <h5>Code Explained</h5>
+                <hr>
+                <p>The first function is getting the user input from the page, then later letting the results be
+                    displayed. Then, the second function, <code>checkForPalindrome</code> is reversing the user input
+                    and checking to see if it is the same as the original input. This code also changes all letters to
+                    lowercase and removes any spaces or special characters so that they do not affect the final result.
+                    After the for loop, an object is created to store both the true or false result of the loop and the
+                    reversed version of the original
+                    input. Finally, the <code>displayResults</code> function is finding the alert box in the HTML and
+                    letting either a true or false result be displayed on the page when it returns that information to
+                    the first function. The alert box will have a class of <code>alert-success</code> if true or a class
+                    of <code>alert-danger</code> if false to make the display look better on the page.</p>
             </div>
         </div>
     </main>

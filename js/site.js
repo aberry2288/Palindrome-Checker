@@ -58,9 +58,4 @@ function displayResults(results) {
         alertBox.classList.add('alert-danger');
 
     }
-
-
-
-
-
 }
